@@ -7,7 +7,7 @@
 	"installed-apps": [
         "djangocms_text_ckeditor",
         "filer",
-		"aldryn_gallery"
+        "aldryn_gallery"
 	],
 	"author": {
 		"name": "Divio AG",
