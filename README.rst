@@ -1,2 +1,2 @@
-Constant Contact Integration App
-================================
+Aldryn Gallery
+==============
