@@ -1,0 +1,11 @@
+{% load i18n static thumbnail sekizai_tags cms_tags %}
+<li class="item">
+    {% if instance.has_link %}<a href="{{ instance.get_link }}">{% endif %}
+    <img src="{{ instance.image.url }}" alt="" />
+    {% if instance.has_link %}</a>{% endif %}
+    {% if instance.content %}
+    <div class="item-content">
+        {{ instance.content|safe }}
+    </div>
+    {% endif %}
+</li>

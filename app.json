@@ -1,0 +1,20 @@
+{
+	"name": "Gallery",
+	"description": "",
+	"version": "0.0.1",
+	"url": "https://github.com/aldryn/aldryn-gallery",
+	"package-name": "aldryn-gallery",
+	"installed-apps": [
+        "djangocms_text_ckeditor",
+        "filer",
+		"aldryn_gallery"
+	],
+	"author": {
+		"name": "Divio AG",
+		"url": "https://www.divio.ch"
+	},
+	"license": {
+		"name": "BSD",
+		"text": "!literal-include LICENSE.txt"
+	}
+}

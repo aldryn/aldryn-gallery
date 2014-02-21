@@ -1,0 +1,19 @@
+{% load i18n static thumbnail sekizai_tags cms_tags %}
+
+<div class="plugin plugin-gallery" id="plugin-gallery-{{ gallery.pk }}">
+{% block gallery %}{% endblock gallery %}
+</div>
+
+{% addtoblock "js" %}<script src="{% static "js/libs/class.min.js" %}"></script>{% endaddtoblock %}
+{% addtoblock "js" %}<script src="{% static "js/plugins/cl.gallery.min.js" %}"></script>{% endaddtoblock %}
+{% addtoblock "js" %}
+<script>
+(function () {
+	new Cl.Gallery('#plugin-gallery-{{ gallery.pk }}', {
+		'timeout': {{ instance.timeout }},
+		'engine': '{{ instance.engine }}',
+		'duration': {{ instance.duration }}
+	});
+})();
+</script>
+{% endaddtoblock %}
