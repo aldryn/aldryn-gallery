@@ -17,7 +17,7 @@ class GalleryCMSPlugin(GalleryBase):
     render_template = False
     name = _('Gallery')
     model = GalleryPlugin
-    # form = GalleryPluginForm  # TODO: Validate Custom ModelForm Choices
+    form = GalleryPluginForm
     allow_children = True
     child_classes = ['SlideCMSPlugin']
 

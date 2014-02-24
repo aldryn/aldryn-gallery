@@ -8,22 +8,25 @@ from cms.models.pluginmodel import CMSPlugin
 from djangocms_text_ckeditor.fields import HTMLField
 from filer.fields.image import FilerImageField
 
+from .utils import get_additional_styles
+
 
 class GalleryPlugin(CMSPlugin):
     STANDARD = 'standard'
     FEATURE = 'feature'
 
-    STYLE_CHOICES = (
+    STYLE_CHOICES = [
         (STANDARD, _('Standard')),
         (FEATURE, _('Feature'))
-    )
+    ]
 
     ENGINE_CHOICES = (
         ('fade', _('Fade')),
         ('slide', _('Slide'))
     )
 
-    style = models.CharField(_('Style'), choices=STYLE_CHOICES, default=STANDARD, max_length=50)
+    style = models.CharField(
+        _('Style'), choices=STYLE_CHOICES + get_additional_styles(), default=STANDARD,max_length=50)
     engine = models.CharField(_('Engine'), choices=ENGINE_CHOICES, default=ENGINE_CHOICES[0][0], max_length=50)
     timeout = models.IntegerField(_('Timeout'), default=5000, help_text=_("Set to 0 to disable autoplay"))
     duration = models.IntegerField(_('Duration'), default=700)
