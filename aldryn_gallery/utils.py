@@ -2,9 +2,15 @@ from django.conf import settings
 
 
 def get_additional_styles():
+    """
+    Get additional styles choices from settings
+    """
     choices = []
-    # Get choices from settings
-    raw = settings.GALLERY_STYLES or None
+    try:
+        raw = settings.GALLERY_STYLES
+    except AttributeError:
+        return choices
+
     if raw:
         raw_choices = raw.split(',')
         for choice in raw_choices:
