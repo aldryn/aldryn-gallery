@@ -33,6 +33,8 @@ class SlideCMSPlugin(GalleryBase):
     render_template = False
     name = _('Slide')
     model = SlidePlugin
+    require_parent = True
+    parent_classes = ['GalleryCMSPlugin']
 
     def render(self, context, instance, placeholder):
         # get style from parent plugin, render chosen template
