@@ -13,7 +13,7 @@ class GalleryPluginForm(forms.ModelForm):
         style = self.cleaned_data.get('style')
         # Check if template for style exists:
         try:
-            select_template('aldryn_gallery/plugins/%s/gallery.html' % style)
+            select_template(['aldryn_gallery/plugins/%s/gallery.html' % style])
         except TemplateDoesNotExist:
             raise forms.ValidationError("Not a valid style (Template does not exist)")
         return style
