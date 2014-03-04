@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from cms.models import Page
 from django.db import models
 from django.utils.html import strip_tags
 from django.utils.translation import ugettext_lazy as _
 
 from cms.models.pluginmodel import CMSPlugin
+from cms.models.fields import PageField
 
 from djangocms_text_ckeditor.fields import HTMLField
 from filer.fields.image import FilerImageField
@@ -49,8 +49,8 @@ class SlidePlugin(CMSPlugin):
     image = FilerImageField(verbose_name=_('image'))
     content = HTMLField("Content", blank=True, null=True)
     url = models.URLField(_("Link"), blank=True, null=True)
-    page_link = models.ForeignKey(Page, verbose_name=_("Page"), blank=True, null=True,
-                                  help_text=_("A link to a page has priority over a text link."))
+    page_link = PageField(verbose_name=_('Page'), blank=True, null=True,
+                          help_text=_("A link to a page has priority over a text link."))
     target = models.CharField(_("target"), blank=True, max_length=100, choices=((('', _('same window')),
                                                                                  ('_blank', _('new window')),
                                                                                  ('_parent', _('parent window')),
