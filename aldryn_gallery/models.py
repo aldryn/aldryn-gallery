@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from cms.models import Page
 from django.db import models
 from django.utils.html import strip_tags
 from django.utils.translation import ugettext_lazy as _
@@ -47,6 +48,14 @@ class GalleryPlugin(CMSPlugin):
 class SlidePlugin(CMSPlugin):
     image = FilerImageField(verbose_name=_('image'))
     content = HTMLField("Content", blank=True, null=True)
+    url = models.URLField(_("Link"), blank=True, null=True)
+    page_link = models.ForeignKey(Page, verbose_name=_("Page"), blank=True, null=True,
+                                  help_text=_("A link to a page has priority over a text link."))
+    target = models.CharField(_("target"), blank=True, max_length=100, choices=((('', _('same window')),
+                                                                                 ('_blank', _('new window')),
+                                                                                 ('_parent', _('parent window')),
+                                                                                 ('_top', _('topmost frame')),
+                                                                                )))
 
     def __unicode__(self):
         name = u'%s' % (self.image.name or self.image.original_filename)
@@ -57,3 +66,10 @@ class SlidePlugin(CMSPlugin):
             else:
                 name += u' (%s)' % text
         return name
+
+    def get_link(self):
+        if self.page_link:
+            return self.page_link.get_absolute_url()
+        if self.url:
+            return self.url
+        return False
