@@ -14,7 +14,7 @@ class GalleryBase(CMSPluginBase):
     class Meta:
         abstract = True
 
-    module = 'Gallery'
+    module = _('Gallery')
 
 
 class GalleryChildBase(GalleryBase):
