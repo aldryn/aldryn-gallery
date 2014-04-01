@@ -27,7 +27,7 @@ class GalleryPlugin(CMSPlugin):
     )
 
     style = models.CharField(
-        _('Style'), choices=STYLE_CHOICES + get_additional_styles(), default=STANDARD,max_length=50)
+        _('Style'), choices=STYLE_CHOICES + get_additional_styles(), default=STANDARD, max_length=50)
     engine = models.CharField(_('Engine'), choices=ENGINE_CHOICES, default=ENGINE_CHOICES[0][0], max_length=50)
     timeout = models.IntegerField(_('Timeout'), default=5000, help_text=_("Set to 0 to disable autoplay"))
     duration = models.IntegerField(_('Duration'), default=300)

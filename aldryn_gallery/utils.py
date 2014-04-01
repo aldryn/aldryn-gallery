@@ -6,14 +6,11 @@ def get_additional_styles():
     Get additional styles choices from settings
     """
     choices = []
-    try:
-        raw = settings.GALLERY_STYLES
-    except AttributeError:
-        return choices
-
+    raw = getattr(settings, 'GALLERY_STYLES', False)
     if raw:
-        raw_choices = raw.split(',')
-        for choice in raw_choices:
+        if isinstance(raw, basestring):
+            raw = raw.split(',')
+        for choice in raw:
             clean = choice.strip()
             choices.append((clean.lower(), clean.title()))
     return choices
