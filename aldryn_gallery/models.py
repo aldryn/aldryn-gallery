@@ -46,7 +46,7 @@ class GalleryPlugin(CMSPlugin):
 
 
 class SlidePlugin(CMSPlugin):
-    image = FilerImageField(verbose_name=_('image'))
+    image = FilerImageField(verbose_name=_('image'), blank=True, null=True)
     content = HTMLField("Content", blank=True, null=True)
     url = models.URLField(_("Link"), blank=True, null=True)
     page_link = PageField(verbose_name=_('Page'), blank=True, null=True,
@@ -58,14 +58,21 @@ class SlidePlugin(CMSPlugin):
                                                                                 )))
 
     def __unicode__(self):
-        name = u'%s' % (self.image.name or self.image.original_filename)
+        image_text = content_text = None
+        if self.image:
+            image_text = u'%s' % (self.image.name or self.image.original_filename)
         if self.content:
             text = strip_tags(self.content).strip()
             if len(text) > 100:
-                name += u' (%s...)' % text[:100]
+                content_text = u'%s...' % text[:100]
             else:
-                name += u' (%s)' % text
-        return name
+                content_text = u'%s' % text
+
+        if image_text and content_text:
+            return u'%s (%s)' % (image_text, content_text)
+        else:
+            return image_text or content_text
+
 
     def get_link(self):
         if self.page_link:

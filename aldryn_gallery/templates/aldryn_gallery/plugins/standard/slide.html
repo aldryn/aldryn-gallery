@@ -1,10 +1,10 @@
 <li class="item">
-	{% if instance.get_link %}<a href="{{ instance.get_link }}" target="{{ instance.target}}">{% endif %}
-	<img src="{{ instance.image.url }}" alt="" />
-	{% if instance.get_link %}</a>{% endif %}
-	{% if instance.content %}
-	<div class="item-content">
-		{{ instance.content|safe }}
-	</div>
-	{% endif %}
+  {% if instance.get_link %}<a href="{{ instance.get_link }}" target="{{ instance.target}}">{% endif %}
+  {% if instance.image %}<img src="{{ instance.image.url }}" alt="" />{% endif %}
+  {% if instance.get_link %}</a>{% endif %}
+  {% if instance.content %}
+  <div class="item-content">
+    {{ instance.content|safe }}
+  </div>
+  {% endif %}
 </li>

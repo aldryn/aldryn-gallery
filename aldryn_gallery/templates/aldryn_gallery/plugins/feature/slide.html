@@ -1,4 +1,4 @@
-<li class="item" style="background-image:url({{ instance.image.url }});">
+<li class="item"{% if instance.image %} style="background-image:url({{ instance.image.url }});"{% endif %}>
 	{% if instance.content %}
 	<div class="item-content">
 		{{ instance.content|safe }}
