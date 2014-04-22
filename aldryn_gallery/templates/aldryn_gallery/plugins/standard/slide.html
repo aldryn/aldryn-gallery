@@ -1,5 +1,5 @@
 <li class="item">
-    {% if instance.get_link %}<a href="{{ instance.get_link }}" target="{{ instance.target}}">{% endif %}
+    {% if instance.get_link %}<a href="{{ instance.get_link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>{% endif %}
     {% if instance.image %}<img src="{{ instance.image.url }}" alt="" />{% endif %}
     {% if instance.get_link %}</a>{% endif %}
     {% if instance.content %}
