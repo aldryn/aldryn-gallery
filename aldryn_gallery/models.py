@@ -7,6 +7,7 @@ from cms.models.pluginmodel import CMSPlugin
 from cms.models.fields import PageField
 
 from djangocms_text_ckeditor.fields import HTMLField
+from filer.fields.folder import FilerFolderField
 from filer.fields.image import FilerImageField
 
 from .utils import get_additional_styles
@@ -73,10 +74,13 @@ class SlidePlugin(CMSPlugin):
         else:
             return image_text or content_text
 
-
     def get_link(self):
         if self.page_link:
             return self.page_link.get_absolute_url()
         if self.url:
             return self.url
         return False
+
+
+class SlideFolderPlugin(CMSPlugin):
+    folder = FilerFolderField(verbose_name=_('folder'))

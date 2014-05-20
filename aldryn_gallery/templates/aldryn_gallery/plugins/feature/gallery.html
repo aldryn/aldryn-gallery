@@ -18,7 +18,7 @@
     <p class="trigger-next"><a href="#{% trans "next" %}">{% trans "next" %}</a></p>
 </div>
 <nav>
-    {% for plugin in instance.child_plugin_instances %}
+    {% for slide in slides %}
     <a href="#{{ forloop.counter }}">{{ forloop.counter }}</a>
     {% endfor %}
 </nav>

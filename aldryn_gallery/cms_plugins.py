@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 from aldryn_gallery.forms import GalleryPluginForm
 from django.utils.translation import ugettext_lazy as _
-from django.conf.urls import patterns, url
 
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
-from .models import GalleryPlugin, SlidePlugin
+from .models import GalleryPlugin, SlidePlugin, SlideFolderPlugin
 
 
 # Base Classes
@@ -27,10 +26,14 @@ class GalleryChildBase(GalleryBase):
 
     def render(self, context, instance, placeholder):
         # get style from parent plugin, render chosen template
-        self.render_template = 'aldryn_gallery/plugins/%s/slide.html' % getattr(
-            instance.parent.get_plugin_instance()[0], 'style',  GalleryPlugin.STANDARD)
+        self.render_template = self.get_slide_template(instance)
         context['instance'] = instance
+        context['image'] = instance.image
         return context
+
+    def get_slide_template(self, instance):
+        return 'aldryn_gallery/plugins/%s/slide.html' % getattr(
+            instance.parent.get_plugin_instance()[0], 'style',  GalleryPlugin.STANDARD)
 
 
 # Plugins
@@ -40,11 +43,14 @@ class GalleryCMSPlugin(GalleryBase):
     model = GalleryPlugin
     form = GalleryPluginForm
     allow_children = True
-    child_classes = ['SlideCMSPlugin']
+    child_classes = ['SlideCMSPlugin', 'SlideFolderCMSPlugin']
 
     def render(self, context, instance, placeholder):
         self.render_template = 'aldryn_gallery/plugins/%s/gallery.html' % instance.style
         context['instance'] = instance
+        number_of_slides = sum([plugin.folder.file_count if isinstance(plugin, SlideFolderPlugin) else 1
+                                for plugin in instance.child_plugin_instances])
+        context['slides'] = range(number_of_slides)
         return context
 
 plugin_pool.register_plugin(GalleryCMSPlugin)
@@ -57,3 +63,14 @@ class SlideCMSPlugin(GalleryChildBase):
 plugin_pool.register_plugin(SlideCMSPlugin)
 
 
+class SlideFolderCMSPlugin(GalleryChildBase):
+    name = _('Slide folder')
+    model = SlideFolderPlugin
+    render_template = 'aldryn_gallery/plugins/slide_folder.html'
+
+    def render(self, context, instance, placeholder):
+        context['instance'] = instance
+        context['slide_template'] = self.get_slide_template(instance)
+        return context
+
+plugin_pool.register_plugin(SlideFolderCMSPlugin)
