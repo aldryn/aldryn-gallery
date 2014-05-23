@@ -7,7 +7,10 @@ from .models import GalleryPlugin
 
 
 class GalleryPluginForm(forms.ModelForm):
-    model = GalleryPlugin
+
+    class Meta:
+        fields = ['style', 'engine', 'timeout', 'duration', 'shuffle']
+        model = GalleryPlugin
 
     def clean_style(self):
         style = self.cleaned_data.get('style')

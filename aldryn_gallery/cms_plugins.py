@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
-from aldryn_gallery.forms import GalleryPluginForm
 from django.utils.translation import ugettext_lazy as _
 
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 
+from .forms import GalleryPluginForm
 from .models import GalleryPlugin, SlidePlugin, SlideFolderPlugin
 
 
 # Base Classes
 class GalleryBase(CMSPluginBase):
+
     class Meta:
         abstract = True
 
@@ -53,14 +54,10 @@ class GalleryCMSPlugin(GalleryBase):
         context['slides'] = range(number_of_slides)
         return context
 
-plugin_pool.register_plugin(GalleryCMSPlugin)
-
 
 class SlideCMSPlugin(GalleryChildBase):
     name = _('Slide')
     model = SlidePlugin
-
-plugin_pool.register_plugin(SlideCMSPlugin)
 
 
 class SlideFolderCMSPlugin(GalleryChildBase):
@@ -73,4 +70,7 @@ class SlideFolderCMSPlugin(GalleryChildBase):
         context['slide_template'] = self.get_slide_template(instance)
         return context
 
+
+plugin_pool.register_plugin(GalleryCMSPlugin)
+plugin_pool.register_plugin(SlideCMSPlugin)
 plugin_pool.register_plugin(SlideFolderCMSPlugin)

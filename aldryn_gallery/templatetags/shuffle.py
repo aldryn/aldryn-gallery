@@ -5,6 +5,7 @@ from django import template
 
 register = template.Library()
 
+
 @register.filter
 def shuffle(arg):
     # slice it, cast it to list
