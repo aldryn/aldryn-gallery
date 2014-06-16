@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 from aldryn_gallery import __version__
 
 REQUIREMENTS = [
-    'djangocms_text_ckeditor==2.1.2',
+    'djangocms_text_ckeditor>=2.1.2',
     'django-filer',
 ]
 
