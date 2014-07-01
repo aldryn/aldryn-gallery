@@ -49,8 +49,11 @@ class GalleryCMSPlugin(GalleryBase):
     def render(self, context, instance, placeholder):
         self.render_template = 'aldryn_gallery/plugins/%s/gallery.html' % instance.style
         context['instance'] = instance
-        number_of_slides = sum([plugin.folder.file_count if isinstance(plugin, SlideFolderPlugin) else 1
-                                for plugin in instance.child_plugin_instances])
+        if instance.child_plugin_instances:
+            number_of_slides = sum([plugin.folder.file_count if isinstance(plugin, SlideFolderPlugin) else 1
+                                    for plugin in instance.child_plugin_instances])
+        else:
+            number_of_slides = 0
         context['slides'] = range(number_of_slides)
         return context
 
