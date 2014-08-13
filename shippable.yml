@@ -3,9 +3,14 @@ language: python
 python:
   - 2.7
 
+env:
+  - DJANGO_VERSION=1.7
+  - DJANGO_VERSION=1.6
+  - DJANGO_VERSION=1.5
+
 install:
   # - pip install djangocms-helper pysqlite
-  - pip install git+https://github.com/nephila/djangocms-helper#egg=djangocms-helper pysqlite django-nose
+  - pip install Django\<=$DJANGO_VERSION git+https://github.com/nephila/djangocms-helper#egg=djangocms-helper pysqlite django-nose
   - python setup.py install
 
 before_script:
