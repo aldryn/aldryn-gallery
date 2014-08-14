@@ -12,12 +12,11 @@ env:
 
 install:
   - pip freeze | xargs pip uninstall -y
-  - pip install Django\<=$DJANGO_VERSION djangocms-helper pysqlite django-nose
+  - pip install Django\<$DJANGO_VERSION djangocms-helper pysqlite django-nose
   - python setup.py install
 
 before_script:
   - mkdir -p shippable/testresults
-  - mkdir -p shippable/codecoverage
 
 script:
   - make runtest
