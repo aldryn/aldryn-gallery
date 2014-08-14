@@ -3,6 +3,8 @@ language: python
 python:
   - 2.7
 
+reset_minion: true
+
 env:
   - DJANGO_VERSION=1.7
   - DJANGO_VERSION=1.6
