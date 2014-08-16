@@ -69,6 +69,11 @@ class SlidePlugin(CMSPlugin):
         blank=True,
         choices=LINK_TARGETS,
     )
+    link_text = models.CharField(
+        verbose_name=_('link text'),
+        max_length=200,
+        blank=True
+    )
 
 
     def __unicode__(self):
