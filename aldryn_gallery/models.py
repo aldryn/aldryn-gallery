@@ -77,7 +77,7 @@ class SlidePlugin(CMSPlugin):
 
 
     def __unicode__(self):
-        image_text = content_text = None
+        image_text = content_text = ''
 
         if self.image_id:
             image_text = u'%s' % (self.image.name or self.image.original_filename)
