@@ -5,6 +5,10 @@ env:
   - TOX_ENV=py27-dj15
   - TOX_ENV=py27-dj16
 
+matrix:
+  allow_failures:
+    - env: TOX_ENV=pep8
+
 install:
   - pip install tox
 
