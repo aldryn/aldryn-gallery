@@ -75,7 +75,6 @@ class SlidePlugin(CMSPlugin):
         blank=True
     )
 
-
     def __unicode__(self):
         image_text = content_text = ''
 
