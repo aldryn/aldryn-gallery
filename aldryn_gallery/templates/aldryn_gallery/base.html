@@ -1,19 +1,10 @@
 {% load static sekizai_tags %}
 
-<div class="plugin plugin-gallery plugin-gallery-{{ instance.style }}" id="plugin-gallery-{{ instance.pk }}">
+{# DOCS: http://getbootstrap.com/javascript/#carousel #}
+<div id="js-aldryn-gallery-{{ instance.pk }}" class="aldryn aldryn-gallery aldryn-gallery-{{ instance.style }}
+    carousel{% if instance.engine == 'fade' %} carousel-fade{% endif %} slide"
+    data-ride="carousel"
+    data-duration="{{ instance.duration }}"
+    data-interval="0">
     {% block content_gallery %}{% endblock %}
 </div>
-
-{% addtoblock "js" %}<script src="{% static "js/libs/class.min.js" %}"></script>{% endaddtoblock %}
-{% addtoblock "js" %}<script src="{% static "js/addons/cl.gallery.min.js" %}"></script>{% endaddtoblock %}
-{% addtoblock "js" %}
-<script>
-jQuery(window).load(function () {
-    new Cl.Gallery('#plugin-gallery-{{ instance.pk }}', {
-        'engine': '{{ instance.engine }}',
-        'duration': {{ instance.duration }},
-        'timeout': {{ instance.timeout }}
-    });
-});
-</script>
-{% endaddtoblock %}

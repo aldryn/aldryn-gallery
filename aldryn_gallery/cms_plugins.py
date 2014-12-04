@@ -33,7 +33,7 @@ class GalleryChildBase(GalleryBase):
         return context
 
     def get_slide_template(self, instance):
-        return 'aldryn_gallery/plugins/%s/slide.html' % getattr(
+        return 'aldryn_gallery/%s/slide.html' % getattr(
             instance.parent.get_plugin_instance()[0], 'style',  GalleryPlugin.STANDARD)
 
 
@@ -47,7 +47,7 @@ class GalleryCMSPlugin(GalleryBase):
     child_classes = ['SlideCMSPlugin', 'SlideFolderCMSPlugin']
 
     def render(self, context, instance, placeholder):
-        self.render_template = 'aldryn_gallery/plugins/%s/gallery.html' % instance.style
+        self.render_template = 'aldryn_gallery/%s/gallery.html' % instance.style
         context['instance'] = instance
         if instance.child_plugin_instances:
             number_of_slides = sum([plugin.folder.file_count if isinstance(plugin, SlideFolderPlugin) else 1
@@ -66,7 +66,7 @@ class SlideCMSPlugin(GalleryChildBase):
 class SlideFolderCMSPlugin(GalleryChildBase):
     name = _('Slide folder')
     model = SlideFolderPlugin
-    render_template = 'aldryn_gallery/plugins/slide_folder.html'
+    render_template = 'aldryn_gallery/base_folder.html'
 
     def render(self, context, instance, placeholder):
         context['instance'] = instance
