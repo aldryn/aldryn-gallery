@@ -15,11 +15,9 @@ from .utils import get_additional_styles
 
 class GalleryPlugin(CMSPlugin):
     STANDARD = 'standard'
-    FEATURE = 'feature'
 
     STYLE_CHOICES = [
         (STANDARD, _('Standard')),
-        (FEATURE, _('Feature'))
     ]
 
     ENGINE_CHOICES = (
