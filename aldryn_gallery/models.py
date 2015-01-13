@@ -67,6 +67,11 @@ class SlidePlugin(CMSPlugin):
         blank=True,
         choices=LINK_TARGETS,
     )
+    link_anchor = models.CharField(
+        verbose_name=_("link anchor"),
+        max_length=128,
+        blank=True,
+    )
     link_text = models.CharField(
         verbose_name=_('link text'),
         max_length=200,
@@ -91,11 +96,14 @@ class SlidePlugin(CMSPlugin):
             return image_text or content_text
 
     def get_link(self):
+        link = self.url or u''
+
         if self.page_link_id:
-            return self.page_link.get_absolute_url()
-        if self.url:
-            return self.url
-        return False
+            link = self.page_link.get_absolute_url()
+
+        if self.link_anchor:
+            link += u'#' + self.link_anchor
+        return link
 
 
 class SlideFolderPlugin(CMSPlugin):
