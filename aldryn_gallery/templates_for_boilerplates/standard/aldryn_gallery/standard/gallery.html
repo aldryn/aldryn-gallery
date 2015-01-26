@@ -1,0 +1,34 @@
+{% extends "aldryn_gallery/base.html" %}
+{% load i18n cms_tags shuffle %}
+
+{% block content_gallery %}
+{# Indicators #}
+<ol class="carousel-indicators">
+    {% for slide in slides %}
+        <li data-target="#" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}></li>
+    {% endfor %}
+</ol>
+
+{# Wrapper for slides #}
+<div class="carousel-inner" role="listbox">
+    {% if instance.shuffle %}
+        {% for plugin in instance.child_plugin_instances|shuffle %}
+            {% render_plugin plugin %}
+        {% endfor %}
+    {% else %}
+        {% for plugin in instance.child_plugin_instances %}
+            {% render_plugin plugin %}
+        {% endfor %}
+    {% endif %}
+</div>
+
+{# Controls #}
+<a class="left carousel-control" href="#js-aldryn-gallery-{{ instance.pk }}" role="button" data-slide="prev">
+    <span class="icon icon-chevron-left glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">{% trans "Previous" %}</span>
+</a>
+<a class="right carousel-control" href="#js-aldryn-gallery-{{ instance.pk }}" role="button" data-slide="next">
+    <span class="icon icon-chevron-right glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">{% trans "Next" %}</span>
+</a>
+{% endblock content_gallery %}
