@@ -60,10 +60,6 @@ class GalleryPluginTestCase(TestCase, BaseCMSTestCase):
             self.create_filer_image(folder=folder, name="image {}".format(i))
         return folder
 
-
-    def get_response_pk(self, response):
-        return int(response.content.decode('utf8').split("/edit-plugin/")[1].split("/")[0])
-
     def test_add_gallery_plugin_api(self):
         gallery_plugin = api.add_plugin(
             self.placeholder, cms_plugins.GalleryCMSPlugin, self.language,
