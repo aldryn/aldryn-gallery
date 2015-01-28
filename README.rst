@@ -24,8 +24,8 @@ Add ``aldryn_gallery`` to ``INSTALLED_APPS``.
 Configure ``aldryn-boilerplates`` (https://pypi.python.org/pypi/aldryn-boilerplates/).
 
 To use the old templates, set ``ALDRYN_BOILERPLATE_NAME='legacy'``.
-To use https://github.com/aldryn/aldryn-boilerplate-standard (recommended) set
-``ALDRYN_BOILERPLATE_NAME='standard'``.
+To use https://github.com/aldryn/aldryn-boilerplate-standard (recommended, will be renamed to
+``aldryn-boilerplate-bootstrap3``) set ``ALDRYN_BOILERPLATE_NAME='bootstrap3'``.
 
 When using the ``legacy`` boilerplate, **jQuery** and
 `classjs <https://github.com/finalangel/classjs-plugins>`_ cl.gallery are required.

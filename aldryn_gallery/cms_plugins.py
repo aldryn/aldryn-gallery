@@ -80,14 +80,14 @@ class SlideFolderCMSPlugin(GalleryChildBase):
         context['instance'] = instance
         if settings.ALDRYN_BOILERPLATE_NAME == 'legacy':
             context['slide_template'] = self.get_slide_template(instance=instance, name='slide')
-        else:  # for 'standard' boilerplate and the recommended structure for new plugins
+        else:  # for 'bootstrap3' boilerplate and the recommended structure for other boilerplates
             context['slide_template'] = self.get_slide_template(instance=instance, name='image_slide')
         return context
 
     def get_render_template(self, context, instance, placeholder):
         if settings.ALDRYN_BOILERPLATE_NAME == 'legacy':
             return 'aldryn_gallery/plugins/slide_folder.html'
-        else:  # for 'standard' boilerplate and the recommended structure for new plugins
+        else:  # for 'bootstrap3' boilerplate and the recommended structure for other boilerplates
             return self.get_slide_template(instance=instance, name='slide_folder')
 
 

@@ -120,19 +120,19 @@ class GalleryPluginTestCase(TestCase, BaseCMSTestCase):
         api.publish_page(self.page, self.superuser, self.language)
         response = self.client.get(self.page.get_absolute_url())
         # self.assertTrue('LEGACY GALLERY' in response.content)
-        # self.assertFalse('STANDARD GALLERY' in response.content)
+        # self.assertFalse('BOOTSTRAP3 GALLERY' in response.content)
         template_loaders.clear_cache()
 
-    @override_settings(ALDRYN_BOILERPLATE_NAME='standard')
-    def test_render_standard_boilerplate_templates(self):
+    @override_settings(ALDRYN_BOILERPLATE_NAME='bootstrap3')
+    def test_render_bootstrap3_boilerplate_templates(self):
         """
-        tests whether "standard" templates exist and don't cause import issues
+        tests whether "bootstrap3" templates exist and don't cause import issues
         """
         from aldryn_boilerplates import template_loaders
         template_loaders.clear_cache()
         self.test_add_gallery_plugin_api()
         api.publish_page(self.page, self.superuser, self.language)
         response = self.client.get(self.page.get_absolute_url())
-        # self.assertTrue('STANDARD GALLERY' in response.content)
+        # self.assertTrue('BOOTSTRAP3 GALLERY' in response.content)
         # self.assertFalse('LEGACY GALLERY' in response.content)
         template_loaders.clear_cache()
