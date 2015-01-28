@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
@@ -21,20 +22,23 @@ class GalleryChildBase(GalleryBase):
     class Meta:
         abstract = True
 
-    render_template = False
     require_parent = True
     parent_classes = ['GalleryCMSPlugin']
 
     def render(self, context, instance, placeholder):
         # get style from parent plugin, render chosen template
-        self.render_template = self.get_slide_template(instance)
         context['instance'] = instance
         context['image'] = instance.image
         return context
 
-    def get_slide_template(self, instance):
-        return 'aldryn_gallery/%s/slide.html' % getattr(
-            instance.parent.get_plugin_instance()[0], 'style',  GalleryPlugin.STANDARD)
+    def get_slide_template(self, instance, name='slide'):
+        return 'aldryn_gallery/plugins/{}/{}.html'.format(
+            getattr(instance.parent.get_plugin_instance()[0], 'style',  GalleryPlugin.STANDARD),
+            name,
+        )
+
+    def get_render_template(self, context, instance, placeholder):
+        return self.get_slide_template(instance=instance)
 
 
 # Plugins
@@ -47,7 +51,6 @@ class GalleryCMSPlugin(GalleryBase):
     child_classes = ['SlideCMSPlugin', 'SlideFolderCMSPlugin']
 
     def render(self, context, instance, placeholder):
-        self.render_template = 'aldryn_gallery/%s/gallery.html' % instance.style
         context['instance'] = instance
         if instance.child_plugin_instances:
             number_of_slides = sum([plugin.folder.file_count if isinstance(plugin, SlideFolderPlugin) else 1
@@ -57,6 +60,9 @@ class GalleryCMSPlugin(GalleryBase):
         context['slides'] = range(number_of_slides)
         return context
 
+    def get_render_template(self, context, instance, placeholder):
+        return 'aldryn_gallery/plugins/{}/gallery.html'.format(instance.style)
+
 
 class SlideCMSPlugin(GalleryChildBase):
     name = _('Slide')
@@ -64,14 +70,25 @@ class SlideCMSPlugin(GalleryChildBase):
 
 
 class SlideFolderCMSPlugin(GalleryChildBase):
+    """
+    Slide Plugin that renders a slide for each image in the linked folder.
+    """
     name = _('Slide folder')
     model = SlideFolderPlugin
-    render_template = 'aldryn_gallery/base_folder.html'
 
     def render(self, context, instance, placeholder):
         context['instance'] = instance
-        context['slide_template'] = self.get_slide_template(instance)
+        if settings.ALDRYN_BOILERPLATE_NAME == 'legacy':
+            context['slide_template'] = self.get_slide_template(instance=instance, name='slide')
+        else:  # for 'standard' boilerplate and the recommended structure for new plugins
+            context['slide_template'] = self.get_slide_template(instance=instance, name='image_slide')
         return context
+
+    def get_render_template(self, context, instance, placeholder):
+        if settings.ALDRYN_BOILERPLATE_NAME == 'legacy':
+            return 'aldryn_gallery/plugins/slide_folder.html'
+        else:  # for 'standard' boilerplate and the recommended structure for new plugins
+            return self.get_slide_template(instance=instance, name='slide_folder')
 
 
 plugin_pool.register_plugin(GalleryCMSPlugin)

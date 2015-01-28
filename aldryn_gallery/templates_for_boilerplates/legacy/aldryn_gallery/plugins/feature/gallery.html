@@ -1,0 +1,25 @@
+{% extends "aldryn_gallery/plugins/standard/gallery.html" %}
+{% load i18n cms_tags shuffle %}
+
+{% block content_gallery %}
+<div class="wrapper">
+    <p class="trigger-previous"><a href="#{% trans "previous" %}">{% trans "previous" %}</a></p>
+    <ul class="viewport">
+    {% if instance.shuffle %}
+        {% for plugin in instance.child_plugin_instances|shuffle %}
+            {% render_plugin plugin %}
+        {% endfor %}
+    {% else %}
+        {% for plugin in instance.child_plugin_instances %}
+            {% render_plugin plugin %}
+        {% endfor %}
+    {% endif %}
+    </ul>
+    <p class="trigger-next"><a href="#{% trans "next" %}">{% trans "next" %}</a></p>
+</div>
+<nav>
+    {% for slide in slides %}
+    <a href="#{{ forloop.counter }}">{{ forloop.counter }}</a>
+    {% endfor %}
+</nav>
+{% endblock content_gallery %}
