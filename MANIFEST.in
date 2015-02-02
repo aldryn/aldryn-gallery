@@ -1,6 +1,5 @@
 include LICENSE.txt
-recursive-include aldryn_gallery/templates_for_boilerplates *
+recursive-include aldryn_gallery/boilerplates *
 recursive-include aldryn_gallery/locale *
 recursive-include aldryn_gallery/migrations *
-recursive-include aldryn_gallery/static_for_boilerplates *
 recursive-exclude * *.pyc
