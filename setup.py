@@ -5,7 +5,7 @@ from aldryn_gallery import __version__
 REQUIREMENTS = [
     'djangocms_text_ckeditor>=2.1.2',
     'django-filer',
-    'aldryn-boilerplates>=0.5',
+    'aldryn-boilerplates>=0.6',
 ]
 
 CLASSIFIERS = [
