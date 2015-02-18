@@ -5,6 +5,6 @@
     carousel{% if instance.engine == 'fade' %} carousel-fade{% endif %} slide"
     data-ride="carousel"
     data-duration="{{ instance.duration }}"
-    data-interval="0">
+    data-interval="{{ instance.timeout }}">
     {% block content_gallery %}{% endblock %}
 </div>
