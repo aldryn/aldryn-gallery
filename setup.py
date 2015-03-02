@@ -6,6 +6,7 @@ REQUIREMENTS = [
     'djangocms_text_ckeditor>=2.1.2',
     'django-filer',
     'easy_thumbnails',
+    'aldryn-boilerplates>=0.6',
 ]
 
 CLASSIFIERS = [
