@@ -32,10 +32,11 @@ class GalleryChildBase(GalleryBase):
         return context
 
     def get_slide_template(self, instance, name='slide'):
-        return 'aldryn_gallery/plugins/{}/{}.html'.format(
-            getattr(instance.parent.get_plugin_instance()[0], 'style',  GalleryPlugin.STANDARD),
-            name,
-        )
+        if instance.parent is None:
+            style = GalleryPlugin.STANDARD
+        else:
+            style = getattr(instance.parent.get_plugin_instance()[0], 'style',  GalleryPlugin.STANDARD)
+        return 'aldryn_gallery/plugins/{}/{}.html'.format(style, name)
 
     def get_render_template(self, context, instance, placeholder):
         return self.get_slide_template(instance=instance)
