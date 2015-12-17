@@ -1,18 +1,8 @@
 {
-    "name": "Aldryn Gallery",
-    "description": "Easy to use and powerfull gallery system",
-    "url": "https://github.com/aldryn/aldryn-gallery",
     "package-name": "aldryn-gallery",
     "installed-apps": [
         "djangocms_text_ckeditor",
         "filer",
         "aldryn_gallery"
-    ],
-    "author": {
-        "name": "Divio AG",
-        "url": "https://www.divio.ch"
-    },
-    "license": {
-        "name": "BSD"
-    }
+    ]
 }
