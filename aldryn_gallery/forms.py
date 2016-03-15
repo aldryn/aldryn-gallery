@@ -9,7 +9,7 @@ from .models import GalleryPlugin
 class GalleryPluginForm(forms.ModelForm):
 
     class Meta:
-        fields = ['style', 'engine', 'timeout', 'duration', 'shuffle']
+        fields = ['style', 'extra_styles', 'engine', 'timeout', 'duration', 'shuffle']
         model = GalleryPlugin
 
     def clean_style(self):
