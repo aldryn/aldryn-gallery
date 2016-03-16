@@ -1,6 +1,6 @@
 {% load static sekizai_tags %}
 
-<div class="plugin plugin-gallery plugin-gallery-{{ instance.style }}" id="plugin-gallery-{{ instance.pk }}">
+<div class="plugin plugin-gallery plugin-gallery-{{ instance.style }} {{ instance.extra_styles }}" id="plugin-gallery-{{ instance.pk }}">
     {% block content_gallery %}{% endblock %}
 </div>
 

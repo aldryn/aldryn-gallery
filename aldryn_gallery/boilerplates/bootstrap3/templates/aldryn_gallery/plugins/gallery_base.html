@@ -1,7 +1,7 @@
 {% load static sekizai_tags %}
 
 {# DOCS: http://getbootstrap.com/javascript/#carousel #}
-<div id="js-aldryn-gallery-{{ instance.pk }}" class="aldryn aldryn-gallery aldryn-gallery-{{ instance.style }}
+<div id="js-aldryn-gallery-{{ instance.pk }}" class="aldryn aldryn-gallery aldryn-gallery-{{ instance.style }} {{ instance.extra_styles }}
     carousel{% if instance.engine == 'fade' %} carousel-fade{% endif %}{% if instance.engine == 'slide' %} slide{% endif %}"
     data-ride="carousel"
     data-duration="{{ instance.duration }}"
