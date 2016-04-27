@@ -1,0 +1,18 @@
+{# Slide for a SlideCMSPlugin instance #}
+{% with link=instance.get_link image=instance.image %}
+    {% if link %}
+        <a href="{{ link }}"{% if instance.target %} target="{{ instance.target }}"{% endif %}>
+            {% if image %}
+                <img src="{{ image.url }}" alt="{{ image.default_alt_text|default:image.label }}">
+            {% else %}
+                {{ instance.link_text }}
+            {% endif %}
+        </a>
+    {% elif image %}
+        <img src="{{ image.url }}" alt="{{ image.default_alt_text|default:image.label }}">
+    {% endif %}
+{% endwith %}
+
+{% if instance.content %}
+    {{ instance.content|safe }}
+{% endif %}
