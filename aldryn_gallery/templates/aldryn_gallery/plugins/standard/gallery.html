@@ -1,0 +1,18 @@
+{% load i18n cms_tags shuffle %}
+
+<div id="gallery-{{ instance.pk }}" class="gallery-{{ instance.style }} {{ instance.extra_styles }}
+    {% if instance.engine == 'fade' %} gallery-fade{% endif %}
+    {% if instance.engine == 'slide' %} gallery-slide{% endif %}"
+    data-duration="{{ instance.duration }}"
+    data-timeout="{{ instance.timeout }}">
+
+    {% if instance.shuffle %}
+        {% for plugin in instance.child_plugin_instances|shuffle %}
+            {% render_plugin plugin %}
+        {% endfor %}
+    {% else %}
+        {% for plugin in instance.child_plugin_instances %}
+            {% render_plugin plugin %}
+        {% endfor %}
+    {% endif %}
+</div>
