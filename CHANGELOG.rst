@@ -2,6 +2,12 @@ CHANGELOG
 =========
 
 
+0.4.1 (2015-01-26)
+------------------
+
+* Added missing reference to the manifest file
+
+
 0.4.0 (2015-01-26)
 ------------------
 
