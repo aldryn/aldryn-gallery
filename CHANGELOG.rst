@@ -1,5 +1,15 @@
-0.3 (2015-01-26)
-================
+CHANGELOG
+=========
+
+
+0.4.0 (2015-01-26)
+------------------
+
+* Added compatibility for other boilerplates.
+
+
+0.3.0 (2015-01-26)
+------------------
 
 * multi-boilerplate support
   new requirement: aldryn-boilerplates (needs configuration)
